@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -116,7 +116,7 @@ body {
   min-height: 100vh;
   background: var(--panel);
   transition: top .8s ease;
-  padding: 160px 20px 40px; /* added padding-top to avoid overlapping gift */
+  padding: 190px 20px 40px; /* increased top padding to avoid gift overlap */
   box-sizing: border-box;
 }
 
@@ -162,10 +162,11 @@ h1 {
 #modal {
   position: fixed;
   inset: 0;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(0,0,0,.75);
+  display: none;
   z-index: 2000;
 }
 
@@ -202,7 +203,7 @@ a { color: var(--accent); }
 <div id="gift-container">
   <div id="web-node"></div>
   <div id="web-thread"></div>
-  <img id="gift" src="gift-images/holog.png" alt="Gift">
+  <img id="gift" src="https://via.placeholder.com/45.png?text=🎁" alt="Gift">
   <div id="gift-text">open me</div>
 </div>
 
@@ -274,4 +275,5 @@ gift.onclick=()=>{
 
 </body>
 </html>
+
 
