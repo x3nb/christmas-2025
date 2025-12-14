@@ -2,124 +2,276 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>12 Days of Giveaways</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About the Characters – RPG Café</title>
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin: 0;
-    padding: 2rem;
-    font-family: 'Special Elite', monospace;
-    background: linear-gradient(to bottom, #2b004d, #1a001a);
-    color: #f8f4ff;
-    line-height: 1.8;
-    overflow-y: auto;
-    position: relative;
-  }
-  h1 {
-    font-size: 2.5rem;
-    background: linear-gradient(to right, #a64ca6, #4b0082);
-    -webkit-background-clip: text;
-    color: transparent;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  h2 {
-    font-size: 1.8rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(to right, #b366ff, #8a2be2);
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-  p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    text-indent: 2em;
-    min-height: 1.5em;
-  }
-  a.back {
-    display: block;
-    margin-top: 2rem;
-    text-align: center;
-    font-size: 1.1rem;
-    color: #d1b3ff;
-    text-decoration: none;
-    text-shadow: 0 0 8px #6a0dad;
-  }
-  a.back:hover {
-    color: #fff;
-    text-shadow: 0 0 12px #b38cff, 0 0 24px indigo;
-  }
-  .floating {
-    position: fixed;
-    pointer-events: none;
-    animation: floatAnim 15s infinite linear;
-    opacity: 0.7;
-  }
-  @keyframes floatAnim {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(15deg); }
-    100% { transform: translateY(0) rotate(0deg); }
-  }
-  #decorations img { width: 50px; margin: 0.5rem; }
+:root {
+  --bg: radial-gradient(circle at top, #2b1b4a, #0d081a);
+  --panel: linear-gradient(135deg, #3b2a6d, #1a1038);
+  --accent: #9b7bff;
+  --text: #efe9ff;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Web canopy */
+#web-canopy {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  z-index: 900;
+}
+
+#web-canopy svg { width: 100%; height: auto; }
+
+/* Gift container */
+#gift-container {
+  position: fixed;
+  top: 120px; /* initial descent position */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1001;
+}
+
+#web-node {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(220,200,255,1), rgba(155,123,255,0.8), rgba(155,123,255,0));
+  box-shadow: 0 0 6px rgba(180,150,255,0.9), 0 0 14px rgba(155,123,255,0.6);
+  animation: glisten 2.8s ease-in-out infinite;
+  z-index: 1002;
+}
+
+#web-node::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 14px;
+  background: rgba(200,180,255,0.85);
+  filter: blur(0.2px);
+  z-index: 1003;
+}
+
+#web-thread {
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(to bottom, rgba(200,180,255,0.9), rgba(200,180,255,0.1));
+  margin-top: -4px;
+  z-index: 1000;
+}
+
+#gift {
+  width: 45px;
+  height: 45px;
+  margin-top: 4px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 8px rgba(160,120,255,.7));
+  transition: transform .3s ease;
+}
+
+#gift:hover { transform: scale(1.1); }
+
+#gift-text {
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+#gift-container:hover #gift-text { opacity: 1; }
+
+/* Stationary gift after calendar opens */
+#gift-container.stationary {
+  top: 100px; /* stays just beneath web */
+}
+
+#gift-container.stationary #gift-text {
+  display: none; /* remove hover text */
+}
+
+/* Drawer / calendar */
+#drawer {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--panel);
+  transition: top .8s ease;
+  padding: 160px 20px 40px; /* added padding-top to avoid overlapping gift */
+  box-sizing: border-box;
+}
+
+#drawer.open { top: 0; }
+
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  letter-spacing: .05em;
+}
+
+.calendar {
+  max-width: 420px;
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+.day {
+  aspect-ratio: 1/1;
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  opacity: .25;
+  pointer-events: none;
+}
+
+.day.active {
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(155,123,255,.7);
+}
+
+.day.active:hover { background: rgba(155,123,255,.25); }
+
+/* Modal */
+#modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.75);
+  z-index: 2000;
+}
+
+#modal-content {
+  background: #1b1035;
+  padding: 24px;
+  border-radius: 14px;
+  max-width: 420px;
+  width: 90%;
+}
+
+#close { float: right; cursor: pointer; font-size: 20px; }
+a { color: var(--accent); }
+
+@keyframes glisten {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.5; }
+}
 </style>
 </head>
 <body>
 
-<h1>About the Characters – RPG Café</h1>
-
-<div id="storyContainer">
-  <h2>Star</h2>
-  <p data-text="Star is matter-of-fact, snarky, and takes no prisoners. She cracks puns just to see if anyone is paying attention. Rough around the edges, yet she has a soft spot for those who have lost their way. She often sips her Earl Grey in the lavender armchair, watching Miro the cat nap peacefully, occasionally muttering, 'Oh look, you're warming up just for me?'"></p>
-
-  <h2>Milo</h2>
-  <p data-text="Milo tends the Zen herbal tea garden daily. Inspired by Yeshua, he learned the art of gardening and building log cabins with his hands. All tea in the Café comes from Milo’s garden. Miro the cat often sprawls in Star's fluffy lavender armchair, and Milo watches patiently, a soft smile forming as if understanding the quiet rhythms of life."></p>
-
-  <h2>Chari</h2>
-  <p data-text="Chari, the youngest with lavender streaks, carries anxiety and the weight of past trauma, yet her quiet humor and gentle heart shine through. Her two white support mice follow her subtly, comfort her, and witness her dry, witty remarks that no one else hears. She is learning to trust the Café as a safe place for her heart."></p>
-
-  <h2>Miki</h2>
-  <p data-text="Miki, motorbike enthusiast, punk-rock flair, spiked bracelets, and boots, manages the Café finances. Loud, vibrant, and occasionally nostalgic for her mother, she quickly shifts the conversation to songs she writes or strange Parisian weather. Her energy brings life and unpredictability, yet her heart is deeply loyal."></p>
-
-  <h2>Yeshua</h2>
-  <p data-text="Yeshua, their adoptive father, teaches kindness, perseverance, and skill. He built log cabins, taught gardening, and guides them in running the Café. He reminds them that they are never alone, that he would protect them all the days of their life, even when they feel bitter or unloved. He is the steady anchor for their swirling worlds."></p>
+<!-- Web Canopy -->
+<div id="web-canopy">
+  <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMin meet">
+    <path d="M300 0 L300 200" stroke="rgba(200,180,255,0.4)" stroke-width="1"/>
+    <path d="M0 0 Q300 140 600 0" stroke="rgba(200,180,255,0.3)" fill="none"/>
+    <path d="M80 0 Q300 120 520 0" stroke="rgba(200,180,255,0.25)" fill="none"/>
+  </svg>
 </div>
 
-<a href="index.html" class="back">← Return to the Table of Contents</a>
+<!-- Gift -->
+<div id="gift-container">
+  <div id="web-node"></div>
+  <div id="web-thread"></div>
+  <img id="gift" src="holog.png" alt="Gift">
+  <div id="gift-text">open me</div>
+</div>
 
-<!-- Ambient sound: barely audible -->
-<audio id="ambient" src="https://freesound.org/data/previews/523/523944_10226536-lq.mp3" loop autoplay volume="0.03"></audio>
+<!-- Drawer -->
+<div id="drawer">
+  <h1>12 Days of Giveaways</h1>
+  <div class="calendar" id="calendar"></div>
+</div>
 
-<!-- Floating decorations -->
-<div id="decorations">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Cup_icon.svg" class="floating" style="top: 10%; left: 10%;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Cat_icon.svg/512px-Cat_icon.svg.png" class="floating" style="top: 50%; left: 70%;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Star_icon.svg/512px-Star_icon.svg.png" class="floating" style="top: 65%; left: 35%;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Chair_icon.svg/512px-Chair_icon.svg.png" class="floating" style="top: 35%; left: 50%;"> <!-- Lavender armchair -->
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Book_icon.svg/512px-Book_icon.svg.png" class="floating" style="top: 20%; left: 70%;"> <!-- Tiny Bible -->
+<!-- Modal -->
+<div id="modal">
+  <div id="modal-content">
+    <span id="close">×</span>
+    <div id="modal-body"></div>
+  </div>
 </div>
 
 <script>
-const paragraphs = document.querySelectorAll("#storyContainer p");
-const speed = 25; // immersive slow typing
+// Calendar setup
+const todayDate = new Date().getDate();
+const calendar = document.getElementById('calendar');
+const drawer = document.getElementById('drawer');
+const modal = document.getElementById('modal');
+const modalBody = document.getElementById('modal-body');
+const giftContainer = document.getElementById('gift-container');
+const gift = document.getElementById('gift');
 
-async function typeParagraph(p) {
-  const text = p.dataset.text;
-  for (let i = 0; i <= text.length; i++) {
-    p.textContent = text.substring(0, i);
-    await new Promise(resolve => setTimeout(resolve, speed));
+const gifts = {
+  14: { title:"Welcome Gift", html:`<a href="RECIPE_VIEW_URL">View Recipe</a>` },
+  15: { title:"Reasons to Celebrate Christmas", html:`<ul><li>Hope</li><li>Love</li><li>Light</li></ul>` },
+  16: { title:"Haiku", html:`<a href="POEM_URL">Read Poem</a>` },
+  17: { title:"Digital Tea Party", html:`<img src="INVITE_IMAGE_URL" style="width:100%">` },
+  18: { title:"Snowglobe Game", html:`<a href="SNOWGLOBE_URL">Visit</a>` },
+  19: { title:"7 Tips for Joy", html:`<ol><li>Slow down</li><li>Rest</li></ol>` },
+  20: { title:"Printable Card", html:`<a href="CARD_URL">View / Print</a>` },
+  21: { title:"Play Game", html:`<a href="GAME_URL">Play</a>` },
+  22: { title:"Membership", html:`<a href="MEMBER_URL">Join</a>` },
+  23: { title:"Chimera Quest", html:`<a href="QUEST_URL">Play</a>` },
+  24: { title:"Characters", html:`<a href="CHAR_URL">Meet</a>` },
+  25: { title:"Christmas Day 🎄", html:`<a href="SONGS_URL">12 Songs</a>` }
+};
+
+// Build calendar
+for(let d=1; d<=31; d++){
+  const div=document.createElement('div');
+  div.className='day';
+  div.textContent=d;
+  if(gifts[d] && d===todayDate){
+    div.classList.add('active');
+    div.onclick=()=>openGift(d);
   }
+  calendar.appendChild(div);
 }
 
-async function typeStory() {
-  for (let p of paragraphs) {
-    await typeParagraph(p);
-    await new Promise(resolve => setTimeout(resolve, 400));
-  }
+function openGift(day){
+  modalBody.innerHTML=`<h2>${gifts[day].title}</h2>${gifts[day].html}`;
+  modal.style.display='flex';
 }
 
-typeStory();
+document.getElementById('close').onclick=()=>modal.style.display='none';
+window.onclick=e=>{if(e.target===modal) modal.style.display='none';};
+
+// Gift click → open drawer + make gift stationary
+gift.onclick=()=>{
+  giftContainer.classList.add('opened', 'stationary');
+  drawer.classList.add('open');
+};
 </script>
+
 </body>
 </html>
+
