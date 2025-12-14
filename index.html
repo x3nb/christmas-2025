@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About the Characters – RPG Café</title>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    padding: 2rem;
+    font-family: 'Special Elite', monospace;
+    background: linear-gradient(to bottom, #2b004d, #1a001a);
+    color: #f8f4ff;
+    line-height: 1.8;
+    overflow-y: auto;
+    position: relative;
+  }
+  h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #a64ca6, #4b0082);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #b366ff, #8a2be2);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    text-indent: 2em;
+    min-height: 1.5em;
+  }
+  a.back {
+    display: block;
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #d1b3ff;
+    text-decoration: none;
+    text-shadow: 0 0 8px #6a0dad;
+  }
+  a.back:hover {
+    color: #fff;
+    text-shadow: 0 0 12px #b38cff, 0 0 24px indigo;
+  }
+  .floating {
+    position: fixed;
+    pointer-events: none;
+    animation: floatAnim 15s infinite linear;
+    opacity: 0.7;
+  }
+  @keyframes floatAnim {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(15deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+  #decorations img { width: 50px; margin: 0.5rem; }
+</style>
+</head>
+<body>
+
+<h1>About the Characters – RPG Café</h1>
+
+<div id="storyContainer">
+  <h2>Star</h2>
+  <p data-text="Star is matter-of-fact, snarky, and takes no prisoners. She cracks puns just to see if anyone is paying attention. Rough around the edges, yet she has a soft spot for those who have lost their way. She often sips her Earl Grey in the lavender armchair, watching Miro the cat nap peacefully, occasionally muttering, 'Oh look, you're warming up just for me?'"></p>
+
+  <h2>Milo</h2>
+  <p data-text="Milo tends the Zen herbal tea garden daily. Inspired by Yeshua, he learned the art of gardening and building log cabins with his hands. All tea in the Café comes from Milo’s garden. Miro the cat often sprawls in Star's fluffy lavender armchair, and Milo watches patiently, a soft smile forming as if understanding the quiet rhythms of life."></p>
+
+  <h2>Chari</h2>
+  <p data-text="Chari, the youngest with lavender streaks, carries anxiety and the weight of past trauma, yet her quiet humor and gentle heart shine through. Her two white support mice follow her subtly, comfort her, and witness her dry, witty remarks that no one else hears. She is learning to trust the Café as a safe place for her heart."></p>
+
+  <h2>Miki</h2>
+  <p data-text="Miki, motorbike enthusiast, punk-rock flair, spiked bracelets, and boots, manages the Café finances. Loud, vibrant, and occasionally nostalgic for her mother, she quickly shifts the conversation to songs she writes or strange Parisian weather. Her energy brings life and unpredictability, yet her heart is deeply loyal."></p>
+
+  <h2>Yeshua</h2>
+  <p data-text="Yeshua, their adoptive father, teaches kindness, perseverance, and skill. He built log cabins, taught gardening, and guides them in running the Café. He reminds them that they are never alone, that he would protect them all the days of their life, even when they feel bitter or unloved. He is the steady anchor for their swirling worlds."></p>
+</div>
+
+<a href="index.html" class="back">← Return to the Table of Contents</a>
+
+<!-- Ambient sound: barely audible -->
+<audio id="ambient" src="https://freesound.org/data/previews/523/523944_10226536-lq.mp3" loop autoplay volume="0.03"></audio>
+
+<!-- Floating decorations -->
+<div id="decorations">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Cup_icon.svg" class="floating" style="top: 10%; left: 10%;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Cat_icon.svg/512px-Cat_icon.svg.png" class="floating" style="top: 50%; left: 70%;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Star_icon.svg/512px-Star_icon.svg.png" class="floating" style="top: 65%; left: 35%;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Chair_icon.svg/512px-Chair_icon.svg.png" class="floating" style="top: 35%; left: 50%;"> <!-- Lavender armchair -->
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Book_icon.svg/512px-Book_icon.svg.png" class="floating" style="top: 20%; left: 70%;"> <!-- Tiny Bible -->
+</div>
+
+<script>
+const paragraphs = document.querySelectorAll("#storyContainer p");
+const speed = 25; // immersive slow typing
+
+async function typeParagraph(p) {
+  const text = p.dataset.text;
+  for (let i = 0; i <= text.length; i++) {
+    p.textContent = text.substring(0, i);
+    await new Promise(resolve => setTimeout(resolve, speed));
+  }
+}
+
+async function typeStory() {
+  for (let p of paragraphs) {
+    await typeParagraph(p);
+    await new Promise(resolve => setTimeout(resolve, 400));
+  }
+}
+
+typeStory();
+</script>
+</body>
+</html>
