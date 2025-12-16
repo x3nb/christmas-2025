@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chimera-Escape Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"> <!-- Tron-style digital font -->
+    <style>
+        body {
+            background: black; /* Black background for cinematic effect */
+            font-family: 'Courier New', monospace; /* Vintage typewriter font for sections */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .cinematic-frame {
+            position: relative;
+            width: 90vw;
+            max-width: 800px;
+            height: 80vh;
+            border: 20px solid black; /* Cinematic director's cut frame: thick black borders */
+            box-shadow: 0 0 50px rgba(100, 149, 237, 0.5); /* Cornflower blue glow on frame for gothic depth */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: epicPulse 4s infinite ease-in-out; /* Smoother, hypnotic pulsing */
+        }
+
+        @keyframes epicPulse {
+            0%, 100% { box-shadow: 0 0 50px rgba(100, 149, 237, 0.5); }
+            50% { box-shadow: 0 0 70px rgba(100, 149, 237, 0.7); }
+        }
+
+        .terminal-monitor {
+            background: linear-gradient(to bottom, #2e003e 0%, #333333 100%); /* Deeper gothic ombre: dark purple to charcoal grey */
+            border: 5px solid #6495ED; /* Cornflower blue border for gothic elegance */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 
+                inset 0 0 20px rgba(100, 149, 237, 0.3), /* Inner cornflower glow */
+                0 0 30px rgba(100, 149, 237, 0.8), /* Outer cornflower glow */
+                0 10px 40px rgba(0, 0, 0, 0.7); /* Deeper gothic shadow for mystery */
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow-y: auto; /* Enables vertical scrolling if content overflows */
+            overflow-x: hidden; /* Prevents horizontal scroll */
+            transition: filter 0.5s ease; /* Smooth transition for music effects */
+            transform: perspective(1000px) rotateX(5deg); /* Subtle 3D hologram tilt */
+            animation: hologramFlicker 8s infinite ease-in-out; /* Smoother, hypnotic flicker */
+        }
+
+        .terminal-monitor.music-on {
+            filter: brightness(1.1) contrast(1.05); /* Subtle epic boost when music is on */
+        }
+
+        @keyframes hologramFlicker {
+            0%, 100% { opacity: 1; transform: perspective(1000px) rotateX(5deg) scale(1); }
+            50% { opacity: 0.98; transform: perspective(1000px) rotateX(5deg) scale(1.005); }
+        }
+
+        .terminal-monitor::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(100, 149, 237, 0.1) 50%, transparent 51%), /* Vertical grid lines with cornflower blue */
+                linear-gradient(0deg, transparent 49%, rgba(100, 149, 237, 0.1) 50%, transparent 51%); /* Horizontal grid lines */
+            background-size: 20px 20px; /* Grid pattern */
+            pointer-events: none;
+            opacity: 0.5;
+            animation: gridScan 10s linear infinite; /* Slower, hypnotic scanning */
+        }
+
+        .terminal-monitor::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), transparent, rgba(100, 149, 237, 0.1)); /* Subtle gothic sheen with cornflower */
+            border-radius: 15px;
+            pointer-events: none;
+            animation: sheenShift 12s infinite linear; /* Slower, hypnotic sheen shift */
+        }
+
+        @keyframes sheenShift {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        @keyframes gridScan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); }
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif; /* Tron digital font */
+            font-size: 3em;
+            color: #6495ED; /* Cornflower blue for titles */
+            text-shadow: 
+                0 0 10px #6495ED, 
+                0 0 20px #6495ED, 
+                0 0 30px #6495ED, 
+                0 0 40px #6495ED; /* Cornflower blue neon glow */
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: textGlow 3s infinite ease-in-out; /* Smoother, hypnotic text glow */
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 10px #6495ED; }
+            50% { text-shadow: 0 0 20px #6495ED, 0 0 30px #6495ED; }
+        }
+
+        .section {
+            background: rgba(0, 0, 0, 0.9); /* Darker gothic overlay */
+            color: white;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border: 1px solid #6495ED; /* Cornflower border */
+            box-shadow: 0 0 10px rgba(100, 149, 237, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.5); /* Gothic inner shadow */
+            font-family: 'Courier New', monospace;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #6495ED; /* Cornflower accent */
+            text-shadow: 0 0 5px #6495ED;
+        }
+
+        .item {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(100, 149, 237, 0.1); /* Subtle cornflower tint */
+            border: 1px solid #6495ED;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.5s ease; /* Smoother transitions */
+            position: relative;
+            z-index: 1;
+        }
+
+        .item:hover {
+            background: rgba(100, 149, 237, 0.3);
+            box-shadow: 0 0 15px #6495ED;
+            text-shadow: 0 0 5px #6495ED;
+            transform: scale(1.02); /* Gentler scale for hypnotic feel */
+        }
+
+        .item.miracle {
+            animation: miracleBurst 1.5s ease-out; /* Miraculous burst effect */
+        }
+
+        @keyframes miracleBurst {
+            0% { box-shadow: 0 0 15px #6495ED; transform: scale(1); }
+            50% { box-shadow: 0 0 50px #FFD700, 0 0 100px #FFD700; transform: scale(1.1); } /* Golden burst for miracle */
+            100% { box-shadow: 0 0 15px #6495ED; transform: scale(1); }
+        }
+
+        .price {
+            float: right;
+            font-weight: bold;
+            color: #6495ED;
+        }
+
+        .music-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.9);
+            color: #6495ED;
+            border: 1px solid #6495ED;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            z-index: 2;
+            transition: all 0.5s ease;
+            border-radius: 5px;
+        }
+
+        .music-toggle:hover {
+            box-shadow: 0 0 10px #6495ED;
+            transform: scale(1.05);
+        }
+
+        .music-toggle.active {
+            background: rgba(100, 149, 237, 0.5);
+            box-shadow: 0 0 15px #6495ED;
+            animation: buttonPulse 2s infinite ease-in-out; /* Smoother pulse */
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { box-shadow: 0 0 15px #6495ED; }
+            50% { box-shadow: 0 0 25px #6495ED, 0 0 35px #6495ED; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cinematic-frame">
+        <div class="terminal-monitor" id="terminal">
+            <button class="music-toggle" id="musicBtn" onclick="toggleMusic()">💀 Music Off</button>
+            <h1 class="title">Chimera-Escape</h1>
+            
+            <div class="section">
+                <h2>HERBAL-TEAS</h2>
+                <a href="YOUR_EARL_GREY_AFFILIATE_LINK_HERE" class="item" onclick="triggerMiracle(this, 'Earl Grey Tea: A classic black tea blend with bergamot oil for a citrusy kick. Perfect for relaxation. Affiliate link to purchase.'); return false;">
+                    Earl Grey <span class="price">$5.00</span>
+                </a>
+                <a href="YOUR_CHAMOMILE_AFFILIATE_LINK_HERE" class="item" onclick="triggerMiracle(this, 'Chamomile Tea: A soothing herbal infusion from chamomile flowers, known for calming effects and aiding sleep. Affiliate link to purchase.'); return false;">
+                    Chamomile <span class="price">$5.00</span>
+                </a>
+                <a href="YOUR_LAVENDER_AFFILIATE_LINK_HERE" class="item" onclick="triggerMiracle(this, 'Lavender Tea: A fragrant herbal tea with calming lavender notes, ideal for stress relief. Affiliate link to purchase.'); return false;">
+                    Lavender <span class="price">$4.00</span>
+                </a>
+            </div>
+            
+            <div class="section">
+                <h2>LORE-SONGS</h2>
+                <a href="YOUR_STAR_SONGS_AFFILIATE_LINK_HERE" class="item" onclick="triggerMiracle(this, 'Star-Songs: A collection of celestial-themed tracks evoking wonder and exploration. Stream or buy via affiliate link.'); return false;">
+                    Star-Songs <span class="price">$1.00 each</span>
+                </a>
+                <a href="YOUR_HANS_EPIC_AFFILIATE_LINK_HERE" class="item" onclick="triggerMiracle(this, 'Hans-Epic: An epic orchestral piece inspired by heroic tales, perfect for immersive storytelling. Affiliate link to download.'); return false;">
+                    Hans-Epic <span class="price">$2.00</span>
+                </a>
+                <a href="YOUR_MIKI_NEKO_SONGS_AFFILIATE_LINK_HERE" class="item" onclick="triggerMiracle(this, 'Miki-Neko Songs: Whimsical, cat-inspired melodies with playful rhythms and lore from mythical felines. Affiliate link to purchase.'); return false;">
+                    Miki-Neko Songs <span class="price">Varies</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <audio id="epicMusic" loop>
+        <source src="YOUR_EPIC_MUSIC_URL_HERE" type="audio/mpeg"> <!-- Replace with a URL to an epic track (e.g., royalty-free Tron-inspired music) -->
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="toggleSound">
+        <source src="YOUR_TOGGLE_SOUND_URL_HERE" type="audio/wav"> <!-- Optional: Add a short sound effect for toggle (e.g., a futuristic beep) -->
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        let musicPlaying = false;
+
+        function showSynopsis(text) {
+            alert(text); // Dynamic synopsis popup
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('epicMusic');
+            const toggleSound = document.getElementById('toggleSound');
+            const btn = document.getElementById('musicBtn');
+            const terminal = document.getElementById('terminal');
+
+            if (music.paused) {
+                music.play();
+                toggleSound.play(); // Play toggle sound effect
+                btn.textContent = '👁️ Music On';
+                btn.classList.add('active');
+                terminal.classList.add('music-on');
+                musicPlaying = true;
+            } else {
+                music.pause();
+                toggleSound.play(); // Play toggle sound effect
+                btn.textContent = '💀 Music Off';
+                btn.classList.remove('active');
+                terminal.classList.remove('music-on');
+                musicPlaying = false;
+            }
+        }
+
+        function triggerMiracle(element, synopsis) {
+            // Add miracle class to trigger animation
+            element.classList.add('miracle');
+            
+            // Show synopsis after a short delay
+            setTimeout(() => {
+                showSynopsis(synopsis);
+                // Open the affiliate link in a new tab after synopsis
+                window.open(element.href, '_blank');
+                // Remove miracle class after animation
+                setTimeout(() => {
+                    element.classList.remove('miracle');
+                }, 1500);
+            }, 500); // Delay to let miracle effect start
+        }
+    </script>
+</body>
+</html>
